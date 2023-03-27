@@ -1,0 +1,24 @@
+{
+  "name": "ngx-mat-menu-filter",
+  "version": "1.0.0",
+  "description": "Plug and play filter for you projects that use angular material.",
+   "keywords": [
+    "Angular Material Filter Component",
+    "Angular Material Filter Menu",
+    "Angular Material Menu Filter",
+    "Angular Material Filter",
+    "Angular Filter",
+    "Angular Material Form Filter",
+    "ngx-mat-menu-filter"
+  ],
+  "author": "Salim Zakari",
+  "homepage": "https://mat-tree-select-input-demo.netlify.app/",
+  "peerDependencies": {
+    "@angular/common": "^15.0.0",
+    "@angular/core": "^15.0.0",
+    "@angular/material": "^15.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}

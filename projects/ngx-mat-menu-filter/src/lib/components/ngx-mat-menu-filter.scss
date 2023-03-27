@@ -1,0 +1,17 @@
+.mat-menu-filter {
+  padding: 8px;
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0px;
+    border-bottom: 1px solid #eee;
+  }
+  &-title {
+    font-weight: 450;
+    margin: 0;
+  }
+}
+.ml-10{
+  margin-left:10px
+}

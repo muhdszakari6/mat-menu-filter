@@ -1,0 +1,74 @@
+<form *ngIf="filters.length" class="mat-menu-filter" [formGroup]="form" novalidate (ngSubmit)="applyFilters()">
+  <div class="mat-menu-filter-header">
+    <h5 class="mat-menu-filter-title text-black font-semibold mb-0">Filters</h5>
+    <button type="button" mat-stroked-button (click)="clearFilters()">
+      Clear Filters
+    </button>
+  </div>
+
+  <div class="filter-open p-3">
+    <div formArrayName="filters">
+      <ng-container *ngFor="let item of filters, let i = index">
+        <div class="mat-menu-filter-content">
+
+          <ng-container [formGroupName]="i">
+            <ng-container *ngIf="item.type == 'field'">
+              <mat-form-field [attr.data-test]="item.name" class="filter-form" appearance="outline">
+                <input matInput type="text" formControlName="value" [placeholder]="item.placeholder || ''">
+              </mat-form-field>
+            </ng-container>
+
+            <ng-container *ngIf="item.type == 'date'">
+              <mat-form-field [attr.data-test]="item.name" class="filter-form" appearance="outline">
+                <input matInput type="date" formControlName="value" [placeholder]="item.placeholder || ''">
+              </mat-form-field>
+            </ng-container>
+
+            <ng-container *ngIf="item.type == 'select'">
+              <mat-form-field appearance="outline">
+                <button type="button" matPrefix (click)="reload(item.name)"
+                  [matTooltip]="'Failed to load, click to retry'" *ngIf="!(item.data$ | async)" mat-icon-button>
+                  <mat-icon>refresh</mat-icon>
+                </button>
+                <mat-select formControlName="value" [attr.data-test]="item.name" [placeholder]="item.placeholder || ''">
+                  <mat-option *ngIf="item.allOption" value="">
+                    {{item.allOption}}
+                  </mat-option>
+                  <ng-container *ngIf="(item.data$ | async) && item.label && item.key">
+                    <mat-option value="loading" *ngIf="!(item.data$ | async).length">Loading data...
+                    </mat-option>
+                    <mat-option *ngFor="let data of (item.data$ | async)" [value]="data[item.key]">
+                      {{data[item.label + ""]}}
+                    </mat-option>
+                  </ng-container>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+          </ng-container>
+
+        </div>
+      </ng-container>
+      <div>
+        <button color="primary" data-test="apply" mat-flat-button>Apply</button>
+        <button class="ml-10" type="button" data-test="more" [matMenuTriggerFor]="filterMenu" mat-stroked-button>
+          <mat-icon>more_horizontal</mat-icon>
+          More
+        </button>
+        <mat-menu #filterMenu="matMenu">
+          <mat-selection-list
+            (selectionChange)="filterSelectionChanged($event.options[0].value, $event.options[0].selected)"
+            (click)="$event.stopPropagation()" selectedOptions="filters" #filterList>
+            <mat-list-option class="!h-[42px]" [disabled]="filter.name === allFilters[0].name"
+              *ngFor="let filter of allFilters; let i = index" [value]="filter.name"
+              [selected]="filters | arraySome: filter.name" [attr.data-test]="'option-'+i">
+              <span class="text-sm">
+                {{filter.placeholder}}
+              </span>
+            </mat-list-option>
+          </mat-selection-list>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+
+</form>

@@ -13,6 +13,7 @@
     <mat-icon fontSet="material-icons-outlined">filter_alt</mat-icon>
     Filter
   </button>
+
   <mat-menu #filterMenu="matMenu">
     <ngx-mat-menu-filter (click)="$event.stopPropagation()" (filterValues)="applyFilters($event)"
       [filters]="defaultFilters" [allFilters]="allFilters">

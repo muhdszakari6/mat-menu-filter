@@ -1,24 +1,81 @@
 # NgxMatMenuFilter
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
+A plug and play filter for your projects that use angular material.
 
-## Code scaffolding
+## Dependencies
+*  [Angular](https://angular.io/)
+* [Angular material](https://material.angular.io/)
 
-Run `ng generate component component-name --project ngx-mat-menu-filter` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-mat-menu-filter`.
-> Note: Don't forget to add `--project ngx-mat-menu-filter` or else it will be added to the default project in your `angular.json` file. 
+## Features
+* Different Types of Input Filters
+* Multiple Input Filters
 
-## Build
+## Demo
+ [Demo Application](https://mat-menu-filter.vercel.app/)
+ 
+## Note
+You need to have @angular/material installed in your project, as it is a Peer Dependency.
 
-Run `ng build ngx-mat-menu-filter` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Example
+![mat-menu-filter example ](https://res.cloudinary.com/muhdsalim/image/upload/v1679937587/Screenshot_2023-03-27_at_18.13.12_ivzaqv.png)
 
-## Publishing
 
-After building your library with `ng build ngx-mat-menu-filter`, go to the dist folder `cd dist/ngx-mat-menu-filter` and run `npm publish`.
+## Installation
+After installing the above dependencies. Install mat-tree-select-input via.
+```bash 
+npm i ngx-mat-menu-filter
+```
 
-## Running unit tests
+Once installed you need to import our main module in your application module:
+```javascript 
+import { NgxMatMenuFilterModule } from "ngx-mat-menu-filter";
 
-Run `ng test ngx-mat-menu-filter` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@NgModule({
+  declarations: [AppComponent, ...],
+  imports: [NgxMatMenuFilterModule, ...],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+}
+```
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Usage
+ngx-mat-menu-filter is designed to work with mat-menu. Simply create a button that will trigger the menu filter. For example:
+```html 
+ <button [matMenuTriggerFor]="filterMenu" #filterMenuTrigger="matMenuTrigger">
+    <mat-icon fontSet="material-icons-outlined">filter_alt</mat-icon>
+    Filter
+  </button>
+  
+  <mat-menu #filterMenu="matMenu">
+    <ngx-mat-menu-filter (click)="$event.stopPropagation()" (filterValues)="applyFilters($event)"
+      [filters]="defaultFilters" [allFilters]="allFilters">
+    </ngx-mat-menu-filter>
+  </mat-menu>
+
+```
+You'll need to create the required properties and method i.e: defaultFilters, allFilters and applyFilters
+Hence, a sample for these would be.
+```typescript 
+
+  defaultFilters = [
+    { name: 'productName', type: 'field', placeholder: 'Product Name' },
+    { name: 'userName', type: 'field', placeholder: 'User Name' },
+  ]
+
+  allFilters = [
+    { name: 'productName', type: 'field', placeholder: 'Product Name' },
+    { name: 'userName', type: 'field', placeholder: 'User Name' },
+    { name: 'email', type: 'field', placeholder: 'Email' },
+    { name: 'amount', type: 'field', placeholder: 'Amount' },
+    { name: 'date', type: 'date', placeholder: 'Date' },
+    { name: 'status', data$: of([{ name: 'Pending' }, { name: "Completed" }, { name: "Failed" }]), type: 'select', key: 'name', label: 'name', placeholder: 'Order Status' },
+  ]
+
+  applyFilters(filters: any) {
+    //
+    console.log(filters)
+  }
+
+  ```

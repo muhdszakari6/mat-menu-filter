@@ -1,8 +1,8 @@
 {
   "name": "ngx-mat-menu-filter",
-  "version": "1.0.0",
-  "description": "Plug and play filter for you projects that use angular material.",
-   "keywords": [
+  "version": "1.0.1",
+  "description": "Plug and play filter for your projects that use angular material.",
+  "keywords": [
     "Angular Material Filter Component",
     "Angular Material Filter Menu",
     "Angular Material Menu Filter",

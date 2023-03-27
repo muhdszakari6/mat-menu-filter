@@ -3,31 +3,38 @@
 A plug and play filter for your projects that use angular material.
 
 ## Dependencies
-*  [Angular](https://angular.io/)
-* [Angular material](https://material.angular.io/)
+
+- [Angular](https://angular.io/)
+- [Angular material](https://material.angular.io/)
 
 ## Features
-* Different Types of Input Filters
-* Multiple Input Filters
+
+- Different Types of Input Filters
+- Multiple Input Filters
 
 ## Demo
- [Demo Application](https://mat-menu-filter.vercel.app/)
- 
+
+[Demo Application](https://mat-menu-filter.vercel.app/)
+
 ## Note
+
 You need to have @angular/material installed in your project, as it is a Peer Dependency.
 
 ## Example
+
 ![mat-menu-filter example ](https://res.cloudinary.com/muhdsalim/image/upload/v1679937587/Screenshot_2023-03-27_at_18.13.12_ivzaqv.png)
 
-
 ## Installation
-After installing the above dependencies. Install mat-tree-select-input via.
-```bash 
+
+After installing the above dependencies. Install ngx-mat-menu-filter via.
+
+```bash
 npm i ngx-mat-menu-filter
 ```
 
 Once installed you need to import our main module in your application module:
-```javascript 
+
+```javascript
 import { NgxMatMenuFilterModule } from "ngx-mat-menu-filter";
 
 @NgModule({
@@ -39,25 +46,31 @@ export class AppModule {
 }
 ```
 
-
 ## Usage
-ngx-mat-menu-filter is designed to work with mat-menu. Simply create a button that will trigger the menu filter. For example:
-```html 
- <button [matMenuTriggerFor]="filterMenu" #filterMenuTrigger="matMenuTrigger">
-    <mat-icon fontSet="material-icons-outlined">filter_alt</mat-icon>
-    Filter
-  </button>
-  
-  <mat-menu #filterMenu="matMenu">
-    <ngx-mat-menu-filter (click)="$event.stopPropagation()" (filterValues)="applyFilters($event)"
-      [filters]="defaultFilters" [allFilters]="allFilters">
-    </ngx-mat-menu-filter>
-  </mat-menu>
 
+ngx-mat-menu-filter is designed to work with mat-menu, so you'll need to create a button that will trigger the menu filter. For example:
+
+```html
+<button [matMenuTriggerFor]="filterMenu" #filterMenuTrigger="matMenuTrigger">
+  <mat-icon fontSet="material-icons-outlined">filter_alt</mat-icon>
+  Filter
+</button>
+
+<mat-menu #filterMenu="matMenu">
+  <ngx-mat-menu-filter
+    (click)="$event.stopPropagation()"
+    (filterValues)="applyFilters($event)"
+    [filters]="defaultFilters"
+    [allFilters]="allFilters"
+  >
+  </ngx-mat-menu-filter>
+</mat-menu>
 ```
-You'll need to create the required properties and method i.e: defaultFilters, allFilters and applyFilters
+
+You'll need to create the required properties and method in your ts file i.e: defaultFilters, allFilters and applyFilters
 Hence, a sample for these would be.
-```typescript 
+
+```typescript
 
   defaultFilters = [
     { name: 'productName', type: 'field', placeholder: 'Product Name' },
@@ -74,8 +87,8 @@ Hence, a sample for these would be.
   ]
 
   applyFilters(filters: any) {
-    //
+    //filters is an object that returns a key/value pair of your filters.
     console.log(filters)
   }
 
-  ```
+```

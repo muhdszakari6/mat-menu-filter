@@ -12,7 +12,8 @@
     "ngx-mat-menu-filter"
   ],
   "author": "Salim Zakari",
-  "homepage": "https://mat-tree-select-input-demo.netlify.app/",
+  "homepage": "https://mat-menu-filter.vercel.app/",
+  "repository": "https://github.com/muhdszakari6/mat-menu-filter",
   "peerDependencies": {
     "@angular/common": "^15.0.0",
     "@angular/core": "^15.0.0",
